@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+              #mapDiv { width: 800px; height: 500px; }
+        </style>
+    </head>
+    <body>
+        <b>My First Map </b>
+        <div id="mapDiv"></div>
+        <!-- Map creation is here -->
+        <script type="text/javascript">
+              //Defining map as a global variable to access from other functions
+              var map;
+            
+              function initMap () {
+                                      
+                    //Setting starting options of map with mapTypeIds including the new style
+                    var mapOptions = {
+						center: new google.maps.LatLng(40, -0.04),
+						zoom: 10,
+						mapTypeControlOptions: {mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'OSM']}
+					};
+					
+					//Getting map DOM element
+                    var mapElement = document.getElementById("mapDiv");
+
+                    //Creating a map with DOM element which is just obtained
+                    map = new google.maps.Map(mapElement, mapOptions);
+					
+					//Defining OSM Map Type
+					var osmMapType = new google.maps.ImageMapType({
+   			         	getTileUrl: function(coord, zoom) {
+                    		return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+                		},
+                		tileSize: new google.maps.Size(256, 256),
+                		name: "OpenStreetMap",
+                		maxZoom: 18
+            		});
+            		
+            		//relate new mapTypeId to the ImageMapType - osmMapType object
+					map.mapTypes.set('OSM', osmMapType);
+					
+					//set this new mapTypeId to be displayed
+					map.setMapTypeId('OSM');
+              }
+
+              google.maps.event.addDomListener(window, 'load', initMap);
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxjxWuSTpRcidYL-_bxKL8ANDe1a2Vxj0&callback=initMap"
+    async defer></script>
+    </body>
+</html>
