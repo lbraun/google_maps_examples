@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A layout example that shows off a responsive pricing table.">
+  <title>Google Map Swipe Effect | Tutorial on piotrgisworks.blogpot.com</title>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script type='text/javascript' src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900%7CQuicksand:400,700%7CQuestrial" rel="stylesheet" />
+  <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/main-grid-old-ie.css">
+    <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://piotrkrosniak.github.io/map_swipe/css/main-grid.css">
+  <!--<![endif]-->
+  <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/layouts/pricing-old-ie.css">
+    <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="http://piotrkrosniak.github.io/map_swipe/css/layouts/pricing.css">
+  <!--<![endif]-->
+  <script type='text/javascript'>
+    var map;
+    var layer_0;
+
+    function initialize() {
+      map = new google.maps.Map(document.getElementById('before'), {
+        center: new google.maps.LatLng(9.693646841383933, -11.42578125),
+        zoom: 2,
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        draggable: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      layer_0 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1>>1",
+          from: "1bcMsQeHuheCfNTqKVy9AD3U_-fJrmxExomI4Rcc"
+        },
+        map: map,
+        styleId: 2,
+        templateId: 2
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <script>
+    var map;
+    var layer_0;
+
+    function initialize() {
+      map = new google.maps.Map(document.getElementById('after'), {
+        center: new google.maps.LatLng(9.693646841383933, -11.42578125),
+        zoom: 2,
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        draggable: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      layer_0 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col1>>1",
+          from: "1VZ6A75d3w-gMhkVAvqvAle2xBGgQuGbk9ndy_XQa"
+        },
+        map: map,
+        styleId: 2,
+        templateId: 2
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <script type='text/javascript'>
+    //<![CDATA[
+    $(window).load(function() {
+      var i = 0;
+      $('#dragbar').mousedown(function(e) {
+        e.preventDefault();
+        $('#mousestatus').html("mousedown" + i++);
+        var limits = {
+          min: 350,
+          max: $(document).width() - 150
+        };
+
+        $(document).mousemove(function(e) {
+          var newX = e.pageX + 2;
+          if (newX >= limits.min && newX <= limits.max) {
+            $('#position').html(e.pageX + ', ' + e.pageY);
+            $('#sidebar').css("width", newX);
+            $('#main').css("left", newX);
+          }
+        });
+
+        console.log("leaving mouseDown");
+      });
+      $(document).mouseup(function(e) {
+        $('#clickevent').html('in another mouseUp event' + i++);
+        $(document).unbind('mousemove');
+      });
+    }); //]]>
+  </script>
+  <style type='text/css'>
+    #sidebar {
+      width: 200px;
+      float: right;
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      overflow: hidden;
+    }
+
+    #dragbar {
+      background-color: black;
+      height: 400px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 15px;
+      z-index: 1001;
+      background-color: #3498DB;
+      background-color: rgba(52, 152, 219, 0.9);
+      box-shadow: 3px 0 2px rgba(25, 25, 25, 0.7), -3px 0 2px rgba(25, 25, 25, 0.7);
+      cursor: ew-resize;
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+
+    #overlay {
+      background: #cc3333;
+      opacity: .9;
+      position: absolute;
+      top: 2%;
+      right: 1%;
+      width: 16%;
+      font-size: 12px;
+      color: #fff;
+      padding: 15px;
+    }
+
+    #before {
+      top: 0px;
+      left: 320px;
+      background-color: white;
+      width: 500px;
+    }
+
+    #after {
+      top: 0px;
+      left: 320px;
+      background-color: white;
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body onload="initialize()">
+  <div class="map">
+    <div id='center'>
+    </div>
+    <div id="before" style="width:1400px; height:400px;">
+    </div>
+  </div>
+  </div>
+  <div id="sidebar">
+    <div id="after" style="width:1400px; height:400px;"></div>
+    <div id="dragbar"></div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <div class="information pure-g">
+    <div class="pure-u-1 pure-u-med-2-3">
+      <div class="l-box">
+        <h3 class="information-head">Life expectancy at birth, total (years 1960 and 2000)</h3>
+        <p>
+          Life expectancy at birth, total (years) Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life. Derived from male and female life expectancy at birth from sources such as: (1) United Nations Population Division. World Population Prospects, (2) United Nations Statistical Division. Population and Vital Statistics Report (various years), (3) Census reports and other statistical publications from national statistical offices, (4) Eurostat: Demographic Statistics, (5) Secretariat of the Pacific Community: Statistics and Demography Programme, and (6) U.S. Census Bureau: International Database. Catalog Sources World Development Indicators. Word Bank
+        </p>
+      </div>
+    </div>
+    <div class="pure-u-1 pure-u-med-1-3">
+      <div class="l-box">
+        <h3 class="information-head">PROJECT INFO</h3>
+        <p>
+          The Google Maps swipe layer tool is used to interactively reveal layers beneath the layer being swiped from Fusion Table. This tool makes it easy to see what is underneath a particular layer and compare data from two datasets.To use the Swipe Layer tool, create map in your Fusion Table and copy Table ID to code snipfet from GitHub.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- end information -->
+  <div class="l-content">
+    <div class="pricing-tables pure-g">
+      <div class="pure-u-1 pure-u-med-1-3">
+        <div class="pricing-table pricing-table-free">
+          <div class="pricing-table-header" style='background: #F67C78'>
+            <br>
+            <br>
+            <span class="pricing-table-price">
+                        Visit my Blog
+
+<span>On my blog you can find tutorials about Geographic Information System (GIS),Google Maps and how to use Google Fusion table in data visualization. Please visit me !</span>
+            <br>
+            </span>
+            <a target="_blank" href="http://piotrgisworks.blogspot.com/" class="button">Learn
+More</a>
+          </div>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-med-1-3">
+        <div class="pricing-table pricing-table-free">
+          <div class="pricing-table-header" style='background: #79C4CA'>
+            <br>
+            <br>
+            <span class="pricing-table-price">
+                        Fork me on GitHub <span>This project it's a collaborative project and that you're welcomed to add improvements.You are granted full rights to contribute to the project or use it as a starting point for your own project.</span>
+            </span>
+            <a target="_blank" href="http://github.com/piotrkrosniak" class="button" style='background: #57AEAD'>Learn
+More</a>
+          </div>
+        </div>
+      </div>
+      <div class="pure-u-1 pure-u-med-1-3">
+        <div class="pricing-table pricing-table-free">
+          <div class="pricing-table-header" style='background: #A8C269'>
+            <br>
+            <br>
+            <span class="pricing-table-price">
+                        JQuery <span>jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML. jQuery is the most popular JavaScript library in use today</span>
+            <br>
+            </span>
+            <a target="_blank" href="http://jquery.com/" class="button" style='background: #809944'>Learn
+More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end pricing-tables -->
+  </div>
+  <!-- end l-content -->
+  <div class="footer">
+    <br>
+    </a><a target="_blank" href="http://twitter.com/PiotrKrosniak"><img src=http://i1286.photobucket.com/albums/a604/JustJoel_/TwitterSocialMediaIcon_zps379a327e.png width="40" height="40" alt="Twitter"></a>
+    <br>
+  </div>
+</body>
+
+</html>
