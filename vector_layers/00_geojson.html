@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+        #mapDiv { width: 800px; height: 500px; }
+    </style>
+
+  </head>
+  <body>
+
+    <div id="mapDiv"></div>
+  </body>
+  <!-- Map creation is here -->
+    <script type="text/javascript">
+        //Defining map as a global variable to access from other functions
+        var map;
+
+        function initMap () {
+
+          //Setting starting options of map
+          var mapOptions = {
+              center: new google.maps.LatLng(40, -0.04),
+              zoom: 5,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          //Getting map DOM element
+          var mapElement = document.getElementById('mapDiv');
+
+          //Creating a map with DOM element which is just obtained
+          map = new google.maps.Map(mapElement, mapOptions);
+
+          map.data.loadGeoJson('http://pixel.uji.es/teaching/countries.geo.json.php');
+        }
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxjxWuSTpRcidYL-_bxKL8ANDe1a2Vxj0&callback=initMap"
+  async defer></script>
+</html>
