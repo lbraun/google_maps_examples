@@ -12,7 +12,7 @@
   </style>
   <!-- Map creation is here -->
   <script type="text/javascript">
-    //Defining map as a global variable to access from other functions
+    // Defining map as a global variable to access from other functions
     var map;
     var polyline;
 
@@ -24,7 +24,7 @@
     ];
 
     function addAnimatedPolyline () {
-      //First we iterate over the coordinates array to create a
+      // First we iterate over the coordinates array to create a
       // new array which includes objects of LatLng class.
       var pointCount = lineCoordinates.length;
       var linePath = [];
@@ -36,8 +36,11 @@
       // Defining arrow symbol
       var arrowSymbol = {
         strokeColor: '#000',
-        scale: 3,
-        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        strokeOpacity: 1,
+        fillColor: 'white',
+        fillOpacity: 1,
+        scale: 5,
+        path: google.maps.SymbolPath.CIRCLE
       };
 
       // Polyline properties are defined below
@@ -72,17 +75,17 @@
 
     function initMap() {
 
-      //Setting starting options of map
+      // Setting starting options of map
       var mapOptions = {
         center: new google.maps.LatLng(40.17694, 30.8806),
         zoom: 7,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
-      //Getting map DOM element
+      // Getting map DOM element
       var mapElement = document.getElementById('mapDiv');
 
-      //Creating a map with DOM element which is just obtained
+      // Creating a map with DOM element which is just obtained
       map = new google.maps.Map(mapElement, mapOptions);
 
       addAnimatedPolyline();
