@@ -48,7 +48,7 @@
               title: 'Standard Marker'
             });
             var infowindow = new google.maps.InfoWindow({
-                 content: 'Marker Info Window '
+              content: 'Marker Info Window '
             });
 
             google.maps.event.addListener(marker, 'click', function() {
@@ -61,12 +61,21 @@
               position: new google.maps.LatLng(40, -0.06),
               map: map,
               icon: 'img/coffee.png',
+              animation: google.maps.Animation.BOUNCE,
               title: 'Icon Marker '
             });
+
+            marker.addListener('click', toggleBounce);
+
+            function toggleBounce() {
+              if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+              } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+              }
+            }
           });
         }
-
-        google.maps.event.addDomListener(window, 'load', initMap);
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxjxWuSTpRcidYL-_bxKL8ANDe1a2Vxj0&callback=initMap"
   async defer></script>
